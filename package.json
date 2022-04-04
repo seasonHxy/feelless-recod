@@ -17,12 +17,7 @@
     "ie >= 9",
     "not op_mini all"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint --config .commitlintrc.js -E HUSKY_GIT_PARAMS"
-    }
-  },
+
   "lint-staged": {
     "*.{ts,tsx,js}": [
       "eslint --config .eslintrc.js"
@@ -84,7 +79,7 @@
     "eslint-plugin-unicorn": "^29.0.0",
     "fork-ts-checker-webpack-plugin": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",
-    "husky": "^4.3.8",
+    
     "ip": "^1.1.5",
     "is-root": "^2.1.0",
     "less": "^4.1.2",
