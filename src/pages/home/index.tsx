@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import './index.less';
 import '../../style/index.less';
-import { hxMessage } from '../../helper/message';
+import Message from 'Components/Message';
 import WebRecord from '../../helper/record';
 
 const Home = () => {
@@ -17,11 +17,11 @@ const Home = () => {
     if (isRecording) {
       setIsRecording(false);
       pageRecord.end();
-      hxMessage('end record!', 'success');
+      Message('end record!', 'success');
     } else {
       setIsRecording(true);
       pageRecord.start();
-      hxMessage('start record!', 'success');
+      Message('start record!', 'success');
     }
   };
 

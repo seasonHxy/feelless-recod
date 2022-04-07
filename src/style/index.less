@@ -1,0 +1,149 @@
+//一些辅助样式, 如字体相关 边距相关
+@import './tools.less';
+//滚动条
+* {
+  box-sizing: border-box;
+  
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: hsla(220, 4%, 58%, 0.5);
+    transition: background-color 0.3s;
+
+    &:hover {
+      background: #bbb;
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+html,
+body {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  color: #375375;
+}
+
+li {
+  list-style: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.box-cont {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.btn {
+  height: 32px;
+  padding: 4px 16px;
+  color: #375375;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: 0.3s;
+  outline: none;
+  &:hover {
+    color: #2361f9;
+    border-color: #2361f9;
+  }
+}
+
+.theme-btn {
+  .btn();
+  background-color: #2361f9;
+  color: #fff;
+  border: 1px solid transparent;
+  &:hover {
+    background-color: darken(#2361f9, 6%);
+    color: #fff;
+  }
+  &:active {
+    background-color: darken(#2361f9, 10%);
+    box-shadow: 0 0 2px 3px #2360f944;
+  }
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flex-center {
+  .flex();
+  justify-content: center;
+}
+
+.flex-ard {
+  .flex();
+  justify-content: space-around;
+}
+
+.flex-bt {
+  .flex();
+  justify-content: space-between;
+}
+
+.flex-cl {
+  .flex();
+  flex-direction: column;
+  justify-content: center;
+}
+
+// 鼠标
+.app-mouse {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  background: no-repeat url('/src/assets/img/mouse.png');
+  background-size: 32px 32px;
+  opacity: 0;
+  &.active {
+    transition: 0.1s;
+    opacity: 1;
+  }
+}
+
+// 全局气泡消息
+.hx-message {
+  position: fixed;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  padding: 8px 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 4px 7px 14px #bebebe;
+  border: 1px solid #ededed;
+  transition: .3s;
+  &.success {
+    color: #00c2a7;
+    border-color: #00c2a7;
+  }
+  &.error {
+    color: #f77062;
+    border-color: #f77062;
+  }
+}

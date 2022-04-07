@@ -1,0 +1,109 @@
+// 辅助
+
+/////////////////////////字体相关
+//字体大小
+.font-size-12 {
+  font-size: 12px;
+}
+
+.font-size-18 {
+  font-size: 18px;
+}
+
+.font-size-20 {
+  font-size: 20px;
+}
+
+.font-size-24 {
+  font-size: 24px;
+}
+
+.font-size-32 {
+  font-size: 32px;
+}
+
+.font-size-40 {
+  font-size: 40px;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/////////////////////////边距相关
+
+// 有8的倍数 8 12 16 24 32 40 48 56 64
+// 用法
+// 比如 mr-8 等于 margin-right: 8px; 
+// 比如 pb-24 等于 padding-bottom: 24px; 
+// <div className="pb-24"></div>
+
+@base: 8;
+
+//margin 
+.coco-mixin(m, margin);
+
+//margin-right
+.coco-mixin(mr, margin-right);
+
+//margin-left
+.coco-mixin(ml, margin-left);
+
+//margin-top
+.coco-mixin(mt, margin-top);
+
+//margin-bottom
+.coco-mixin(mb, margin-bottom);
+
+//margin-left margin-right 组合 mx  代表x方向
+// .coco-mixin(mx, margin-left, margin-right);
+
+//padding
+.coco-mixin(p, padding);
+
+//padding-right
+.coco-mixin(pr, padding-right);
+
+//padding-left
+.coco-mixin(pl, padding-left);
+
+//padding-top
+.coco-mixin(pt, padding-top);
+
+//padding-bottom
+.coco-mixin(pb, padding-bottom);
+
+// mixin 函数
+// 举个栗子：
+// .coco-mixin(pb, padding-bottom);
+// 会被转为  .pb-4 { padding-bottom: 4px; } .pb-8 { padding-bottom: 8px; } ...
+.coco-mixin-base(@type, @css, @num) {
+  @name: @base * @num;
+
+  .@{type}-@{name} {
+    @{css}: @base * @num * 1px;
+  }
+}
+
+.coco-mixin(@type, @css) {
+  .coco-mixin-base(@type, @css, 0.5);
+  .coco-mixin-base(@type, @css, 1);
+  .coco-mixin-base(@type, @css, 1.5);
+  .coco-mixin-base(@type, @css, 2);
+  .coco-mixin-base(@type, @css, 3);
+  .coco-mixin-base(@type, @css, 4);
+  .coco-mixin-base(@type, @css, 5);
+  .coco-mixin-base(@type, @css, 6);
+  .coco-mixin-base(@type, @css, 7);
+  .coco-mixin-base(@type, @css, 8);
+}
