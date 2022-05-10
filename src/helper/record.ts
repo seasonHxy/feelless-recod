@@ -9,11 +9,13 @@ class WebRecord extends virtualDom {
   public observerMouseBindFun: (e: MouseEvent) => void; //监听鼠标函数;
   public observerInputBindFun: (e: Event) => void; //监听鼠标函数;
 
+
   constructor() {
     super();
     // 解决 addEventListener 里面this指向问题, 及解除绑定
     this.observerMouseBindFun = this.observerMouse.bind(this);
     this.observerInputBindFun = this.observerInput.bind(this);
+    this._reportUrl = "www.baidu.com"
   }
 
   /**
@@ -167,6 +169,59 @@ class WebRecord extends virtualDom {
     this.actionList.push(action);
     console.log('all__actions', this.actionList);
     console.log('all__idMap', this.idMap);
+  }
+
+  utf8_to_b64(str: string) {
+    return window.btoa(unescape(encodeURIComponent(str)))
+  }
+
+  b64_to_utf8(str: string) {
+    return decodeURIComponent(escape(window.atob(str)))
+  }
+
+  _reportRequest(result: string, okCB: Function, flag:string) {
+    if (this.isDebug) {
+      console.log('上报数据:', result)
+    }
+    if (this._reportUrl) {
+      let _self = this
+      let reportTimestamp = result.reportTimestamp || ''
+      let appid = result.appid || ''
+      let content = _self.utf8_to_b64(`${appid}${JSON.stringify(result)}${reportTimestamp}`)
+      let params = { reportTimestamp, content }
+      if (this.isDebug) {
+        console.log('上报数据请求, 地址:', this._reportUrl, ' 参数: ', params)
+      }
+      fetch(this._reportUrl, {
+        method: 'POST',
+        body: JSON.stringify(params),
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(res => res.json())
+        .then(function(response) {
+          if (_self.isDebug) {
+            console.log('上报数据响应:', response)
+          }
+          if (response && response.resultCode === '1000') {
+            okCB && okCB()
+          } else {
+            if (!flag) {
+              _self._saveReportFailDatas(result)
+            }
+          }
+        })
+        .catch(function(error) {
+          if (_self.isDebug) {
+            console.log('上报数据失败:', error)
+          }
+          if (!flag) {
+            _self._saveReportFailDatas(result)
+          }
+        })
+    }
   }
 }
 
